@@ -6,6 +6,22 @@
 
 require('./bootstrap');
 
+/* =========================================
+             preloader
+============================================ */
+window.addEventListener("load", function () {
+    document.querySelector("#preloader").style.display = "none";
+  });
+
+/* =========================================
+             flash-message
+============================================ */
+  
+$(document).ready(
+    setTimeout(function() {
+        $('.message-success').fadeOut('fast');
+    }, 2000)
+);
 window.Vue = require('vue').default;
 
 /**

@@ -33,4 +33,10 @@ class Quote extends Model
         public function user(){
             return $this->belongsTo(User::class);
         }
+
+        //prevent the user from modifying other users' post
+        public function isTheOwner($user)
+        {
+          return $this->user_id === $user->id;
+        }
 }

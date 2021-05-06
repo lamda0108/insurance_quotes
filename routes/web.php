@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Auth::routes([ 'register' => false ]);
+Route::get('/', function(){
+    return view('landingPage');
 });
-
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('quote', App\Http\Controllers\QuoteController::class);

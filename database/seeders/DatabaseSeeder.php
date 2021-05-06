@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create()->each(function($user) { 
             $user->quotes()->saveMany( 
                 // for each user, create 1-5 questions
-               \App\Models\Quote::factory()->count(rand(1,100))->make()
+               \App\Models\Quote::factory()->count(rand(100,200))->make()
             );
          });
     }

@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Quote;
 use Illuminate\Http\Request;
+use App\Http\Requests\createQuoteRequest;
 
 class QuoteController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,10 @@ class QuoteController extends Controller
      */
     public function index()
     {
-        //
+        $quotes = Quote::where(['user_id'=>auth()->user()->id])->latest()->paginate(10);
+        return view('quotes.index')->with([
+            'quotes'=>$quotes
+        ]);
     }
 
     /**
@@ -24,7 +31,10 @@ class QuoteController extends Controller
      */
     public function create()
     {
-        //
+        $quote = new Quote();
+        return view('quotes.create')->with([
+            'quote'=>$quote
+        ]);
     }
 
     /**
@@ -33,9 +43,12 @@ class QuoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateQuoteRequest $request)
     {
-        //
+        $request->user()->quotes()->create($request->all());
+        return redirect()->route('quote.index')->with([
+            'message_success'=>'Success! Your quote has been created.'
+        ]);
     }
 
     /**
@@ -46,7 +59,10 @@ class QuoteController extends Controller
      */
     public function show(Quote $quote)
     {
-        //
+        if (!$quote->isTheOwner(auth()->user())) abort(403);
+        return view('quotes.show')->with([
+            'quote'=>$quote
+        ]);
     }
 
     /**
@@ -57,7 +73,10 @@ class QuoteController extends Controller
      */
     public function edit(Quote $quote)
     {
-        //
+        if (!$quote->isTheOwner(auth()->user())) abort(403);
+        return view("quotes.edit")->with([
+            'quote'=>$quote
+        ]);
     }
 
     /**
@@ -67,9 +86,13 @@ class QuoteController extends Controller
      * @param  \App\Models\Quote  $quote
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quote $quote)
+    public function update(CreateQuoteRequest $request, Quote $quote)
     {
-        //
+        if (!$quote->isTheOwner(auth()->user())) abort(403);
+        $quote->update($request->all());
+        return redirect('/quote/' . $quote->id)->with([
+            'message_success'=>'Success! Your quote has been updated.'
+        ]);
     }
 
     /**
@@ -80,6 +103,10 @@ class QuoteController extends Controller
      */
     public function destroy(Quote $quote)
     {
-        //
+        if(!$quote->isTheOwner(auth()->user())) abort(403);
+        $quote->delete();
+        return redirect('/quote')->with([
+            'message_success'=>'Success! Your quote has been deleted'
+        ]);
     }
 }

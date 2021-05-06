@@ -1,0 +1,147 @@
+/* =========================================
+             general feature
+============================================ */
+.login, 
+.banner,
+.show-quote,
+.create-quote,
+.edit-quote,
+.quotes,
+.home{
+    background-color: $yellow !important;
+    min-height: calc(100vh - 55px);
+}
+
+.card{
+    background-color: #fff!important;
+}
+
+.button-main{
+    border: 1px solid $darkYellow !important;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+
+    &:hover{
+        background-color: $yellow !important;
+    }
+}
+
+
+/* =========================================
+             navbar
+============================================ */
+nav.navbar{
+    background-color: $redLight;
+
+    .navbar-brand{
+        color:$white !important;
+    }
+    #navbarDropdown.nav-link{
+        color:$white !important;
+    }
+    a.nav-link{
+        color:$white !important;
+        font-size: 1.1rem;
+    }
+}
+
+
+/* =========================================
+             preloader
+============================================ */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+    background: $yellow;
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+  }
+
+/* =========================================
+             landingPage
+============================================ */
+.banner{
+    position: relative;
+
+    .banner-content {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-45%, -50%);
+          h1 {
+            font-size: 3rem;
+          }
+          @media only screen and (max-width: 992px) {
+            h1{
+                font-size:2.3rem;
+                }
+         }
+            @media only screen and (max-width:576px) {
+            h1{
+                font-size:1.5rem;
+            }
+         }
+          
+          h3 {
+            letter-spacing: 2px;
+          }
+          @media only screen and (max-width: 992px) {
+            h3{
+                font-size:1.5rem;
+            }
+        }
+            @media only screen and (max-width:576px) {
+            h3{
+                font-size:1.1rem;
+            }
+         }
+
+      }
+
+      img{
+          height:35vh;
+      }
+      @media only screen and (max-width: 768px) {
+        img{
+            height: 28vh;
+        }
+    }
+}
+
+/* =========================================
+            flash message
+============================================ */
+.message-success{
+    width: 30%;
+}
+@media only screen and (max-width: 992px) {
+    .message-success{
+        width:50% !important;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .message-success{
+        width:60% !important;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .message-success{
+        width:70% !important;
+    }
+}
+
+.show-quote{
+    font-size: 1.2rem;
+}
+
+
